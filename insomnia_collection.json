@@ -1,0 +1,275 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-04-16T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_root",
+      "parentId": "wrk_analisaai_backend_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}",
+      "name": "Root",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1713246000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_analisaai_backend_sync",
+      "parentId": null,
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "AnalisaAI Backend Sync",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_health",
+      "parentId": "fld_health",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}/health",
+      "name": "Health Check",
+      "description": "Simple health check endpoint",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1713246000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_health",
+      "parentId": "wrk_analisaai_backend_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Health",
+      "description": "Health check endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1713246000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_ping",
+      "parentId": "fld_health",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}/api/health/ping",
+      "name": "Ping",
+      "description": "Simple ping endpoint to check if API is running",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1713245900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_status",
+      "parentId": "fld_health",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}/api/health/status",
+      "name": "Status",
+      "description": "Comprehensive health check for API, database, and Redis",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1713245800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_sync_user",
+      "parentId": "fld_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}/api/sync/user/1",
+      "name": "Sync User",
+      "description": "Sync social media data for a specific user",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {% response 'body', 'req_login', 'b.access_token' %}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713246000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_sync",
+      "parentId": "wrk_analisaai_backend_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Sync",
+      "description": "Data synchronization endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1713245000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_sync_all_users",
+      "parentId": "fld_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.base_url }}/api/sync/all-users",
+      "name": "Sync All Users",
+      "description": "Sync social media data for all active users (admin only)",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {% response 'body', 'req_login', 'b.access_token' %}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713245900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_login",
+      "parentId": "fld_auth",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "url": "{{ _.auth_url }}/api/auth/login",
+      "name": "Login",
+      "description": "Login to get authentication token",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"admin@analisaai.com\",\n\t\"password\": \"secret123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713246000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_analisaai_backend_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Auth",
+      "description": "Authentication endpoints (from auth service)",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1713244000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_analisaai_backend_sync",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1713245000000,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_dev",
+      "parentId": "env_base",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Development",
+      "data": {
+        "base_url": "http://localhost:8001",
+        "auth_url": "http://localhost:8000"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url", "auth_url"]
+      },
+      "color": "#7d69cb",
+      "isPrivate": false,
+      "metaSortKey": 1713245100000,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_prod",
+      "parentId": "env_base",
+      "modified": 1713246000000,
+      "created": 1713246000000,
+      "name": "Production",
+      "data": {
+        "base_url": "https://api-sync.analisaai.com",
+        "auth_url": "https://api-auth.analisaai.com"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url", "auth_url"]
+      },
+      "color": "#ff0000",
+      "isPrivate": false,
+      "metaSortKey": 1713245200000,
+      "_type": "environment"
+    }
+  ]
+}

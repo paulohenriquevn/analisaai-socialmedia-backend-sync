@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=postgresql://genbi:genbipassword@db:5432/socialmedia
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=analisaai-secret-key-6072fd09-704d-4a9d-9b4c-bccdf4ebbdc4
+      - APIFY_API_TOKEN=apify_api_6S8Ue5r9QLFhbKSZ5aKRLd4SlVvGq22tu0Js
+      - LOG_LEVEL=INFO
+      - ENCRYPTION_KEY=jCsJUgEm4r_jk2exMy0wXFJFgVzO6A2kjBpWY4e3oK4=
+    volumes:
+      - .:/app
+    networks:
+      - analisaai-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://genbi:genbipassword@db:5432/socialmedia
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=analisaai-secret-key-6072fd09-704d-4a9d-9b4c-bccdf4ebbdc4
+      - APIFY_API_TOKEN=apify_api_6S8Ue5r9QLFhbKSZ5aKRLd4SlVvGq22tu0Js
+      - LOG_LEVEL=INFO
+      - ENCRYPTION_KEY=jCsJUgEm4r_jk2exMy0wXFJFgVzO6A2kjBpWY4e3oK4=
+    volumes:
+      - .:/app
+    networks:
+      - analisaai-network
+    command: celery -A app.worker.celery worker --loglevel=info
+
+networks:
+  analisaai-network:
+    driver: bridge
+
